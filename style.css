@@ -1,0 +1,169 @@
+/* ==================== VARIABLES & FONTS ==================== */
+:root {
+    --bg-color:          #111827; /* Dark Grayish Blue */
+    --container-bg:      #1f2937; /* Slightly Lighter Container */
+    --box-border:        #374151; /* Medium Gray Border */
+    --text-primary:      #f9fafb; /* Almost White */
+    --text-secondary:    #9ca3af; /* Lighter Gray */
+    --accent-color:      #3b82f6; /* Nice Blue */
+    --accent-hover:      #2563eb;
+    --stop-color:        #ef4444; /* Red for Stop state */
+    --stop-hover:        #dc2626;
+
+    --font-primary:      'Poppins', sans-serif;
+
+    --border-radius-sm:  4px;
+    --border-radius-md:  8px;
+    --transition-speed:  0.25s;
+}
+
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* ==================== BASE & RESET ==================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+/* ==================== MAIN CONTAINER & HEADER ==================== */
+.container {
+    background-color: var(--container-bg);
+    padding: clamp(1.5rem, 5vw, 2.5rem);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 900px; /* Wider container for grid */
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+header h1 {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+header p {
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+/* ==================== COLOR GRID ==================== */
+main {
+    width: 100%;
+}
+
+.color-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1rem; /* Gap between boxes */
+    width: 100%;
+    margin-bottom: 2rem; /* Space before button */
+}
+
+.color-box {
+    aspect-ratio: 1 / 1; /* Make boxes square */
+    background-color: var(--box-border); /* Initial placeholder color */
+    border-radius: var(--border-radius-md);
+    /* Removed cursor: pointer as individual boxes aren't clickable now */
+    position: relative;
+    overflow: hidden;
+    /* Transition only background color for flashing */
+    transition: background-color 0.4s ease; /* Slightly slower transition for flash */
+}
+
+/* Optional: Subtle hover effect even if not clickable */
+.color-box:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+
+/* ==================== BUTTON ==================== */
+footer {
+    margin-top: auto;
+}
+
+.generate-btn { /* Keep class name for consistency, or change to toggle-btn */
+    background-color: var(--accent-color); /* Default: Start color */
+    color: var(--text-primary);
+    border: none;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: background-color var(--transition-speed) ease,
+                transform var(--transition-speed) ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-width: 180px; /* Ensure enough width for text */
+    justify-content: center; /* Center icon and text */
+}
+
+.generate-btn:hover {
+    /* Hover color depends on current state */
+    /* background-color: var(--accent-hover); */
+    transform: translateY(-2px);
+}
+.generate-btn:active {
+    transform: translateY(0);
+}
+
+/* Style for the "Stop" state */
+.generate-btn.running {
+    background-color: var(--stop-color);
+}
+.generate-btn.running:hover {
+    background-color: var(--stop-hover);
+}
+
+.btn-icon {
+    font-size: 1em;
+    line-height: 1; /* Prevent icon affecting button height */
+}
+
+.btn-text {
+    /* Add this if you need specific styling for the text span */
+    line-height: 1;
+}
+
+/* ==================== RESPONSIVENESS ==================== */
+@media (max-width: 600px) {
+    .color-grid-container {
+        gap: 0.75rem;
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    }
+    header h1 { font-size: 1.5rem; }
+    header p { font-size: 0.85rem; }
+}
+
+@media (max-width: 400px) {
+    .color-grid-container {
+         grid-template-columns: repeat(auto-fit, minmax(65px, 1fr));
+         gap: 0.5rem;
+    }
+    .generate-btn { padding: 0.7rem 1.5rem; font-size: 0.9rem;}
+}
